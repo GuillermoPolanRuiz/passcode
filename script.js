@@ -5,6 +5,7 @@ var newPassCode = '';
 
 // Guardar datos en sessionStorage cuando la página carga
 window.onload = function() {
+	toggleFullscreen();
 	GetDate();
 
 	passcode = sessionStorage.getItem("passcode");
@@ -178,4 +179,34 @@ function ClearDots(){
 
 function ShowPasscode() {
 	alert('Passcode: ' + passcode)
+}
+
+// Function to toggle fullscreen
+function toggleFullscreen() {
+	if (!document.fullscreenElement &&    // Check if not already in fullscreen
+		!document.webkitFullscreenElement && // For Safari
+		!document.mozFullScreenElement &&    // For Firefox
+		!document.msFullscreenElement) {    // For Internet Explorer
+		// If not in fullscreen, enter fullscreen
+		if (document.documentElement.requestFullscreen) {
+			document.documentElement.requestFullscreen();
+		} else if (document.documentElement.mozRequestFullScreen) { // Firefox
+			document.documentElement.mozRequestFullScreen();
+		} else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+			document.documentElement.webkitRequestFullscreen();
+		} else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+			document.documentElement.msRequestFullscreen();
+		}
+	} else {
+		// If already in fullscreen, exit fullscreen
+		if (document.exitFullscreen) {
+			document.exitFullscreen();
+		} else if (document.mozCancelFullScreen) { // Firefox
+			document.mozCancelFullScreen();
+		} else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+			document.webkitExitFullscreen();
+		} else if (document.msExitFullscreen) { // IE/Edge
+			document.msExitFullscreen();
+		}
+	}
 }
