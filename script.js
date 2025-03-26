@@ -5,7 +5,7 @@ var newPassCode = '';
 
 // Guardar datos en sessionStorage cuando la página carga
 window.onload = function() {
-	toggleFullscreen();
+	//toggleFullscreen();
 	GetDate();
 
 	passcode = sessionStorage.getItem("passcode");
