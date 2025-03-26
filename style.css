@@ -1,4 +1,6 @@
-
+body.homepage #navigation-top {
+	display: none !important;
+}
 @font-face {
 	font-family: 'Compact';
 	src: url("Compact.otf");
