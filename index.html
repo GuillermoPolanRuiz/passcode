@@ -9,18 +9,6 @@
     <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-
-	<script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration) {
-                    console.log('Service Worker registrado con éxito: ', registration);
-                })
-                .catch(function(error) {
-                    console.log('Error al registrar el Service Worker: ', error);
-                });
-        }
-    </script>
 	<!-- ------------------------------------------------------ I  N  I  C  I  O ---------------------------------------------------------------- -->
 
 	<div id="divIndex" class="main">
