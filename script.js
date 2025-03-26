@@ -5,7 +5,7 @@ var newPassCode = '';
 
 // Guardar datos en sessionStorage cuando la página carga
 window.onload = function() {
-	//toggleFullscreen();
+	requestFullScreen()
 	GetDate();
 
 	passcode = sessionStorage.getItem("passcode");
@@ -181,32 +181,26 @@ function ShowPasscode() {
 	alert('Passcode: ' + passcode)
 }
 
-// Function to toggle fullscreen
-function toggleFullscreen() {
-	if (!document.fullscreenElement &&    // Check if not already in fullscreen
-		!document.webkitFullscreenElement && // For Safari
-		!document.mozFullScreenElement &&    // For Firefox
-		!document.msFullscreenElement) {    // For Internet Explorer
-		// If not in fullscreen, enter fullscreen
-		if (document.documentElement.requestFullscreen) {
-			document.documentElement.requestFullscreen();
-		} else if (document.documentElement.mozRequestFullScreen) { // Firefox
-			document.documentElement.mozRequestFullScreen();
-		} else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
-			document.documentElement.webkitRequestFullscreen();
-		} else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-			document.documentElement.msRequestFullscreen();
-		}
-	} else {
-		// If already in fullscreen, exit fullscreen
-		if (document.exitFullscreen) {
-			document.exitFullscreen();
-		} else if (document.mozCancelFullScreen) { // Firefox
-			document.mozCancelFullScreen();
-		} else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
-			document.webkitExitFullscreen();
-		} else if (document.msExitFullscreen) { // IE/Edge
-			document.msExitFullscreen();
-		}
+function requestFullScreen() {
+
+	var el = document.body;
+  
+	// Supports most browsers and their versions.
+	var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen 
+	|| el.mozRequestFullScreen || el.msRequestFullScreen;
+  
+	if (requestMethod) {
+  
+	  // Native full screen.
+	  requestMethod.call(el);
+  
+	} else if (typeof window.ActiveXObject !== "undefined") {
+  
+	  // Older IE.
+	  var wscript = new ActiveXObject("WScript.Shell");
+  
+	  if (wscript !== null) {
+		wscript.SendKeys("{F11}");
+	  }
 	}
-}
+  }
